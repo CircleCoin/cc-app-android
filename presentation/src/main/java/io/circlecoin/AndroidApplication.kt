@@ -20,6 +20,7 @@ import android.app.Application
 import com.crashlytics.android.Crashlytics
 
 import io.circlecoin.internal.di.components.ApplicationComponent
+import io.circlecoin.internal.di.components.DaggerApplicationComponent
 import io.circlecoin.internal.di.modules.ApplicationModule
 import io.fabric.sdk.android.Fabric
 

@@ -51,8 +51,8 @@ allprojects {
         androidVersionName = "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner = 'android.support.test.runner.AndroidJUnitRunner'
         testApplicationId = 'com.javiertarazaga.instasearch.presentation.test'
-        gitSha = getGitSha()
-        gitTimeStamp = getGitTimestamp()
+//        gitSha = getGitSha()
+//        gitTimeStamp = getGitTimestamp()
         isCiEnvironment = isCI
         isPreDexEnabled = preDexEnabled
     }

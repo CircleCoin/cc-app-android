@@ -2,20 +2,15 @@ package io.circlecoin.view
 
 import android.app.Activity
 import android.app.Fragment
-import android.app.FragmentTransaction
 import android.os.Bundle
 import io.circlecoin.AndroidApplication
 import io.circlecoin.internal.di.components.ApplicationComponent
 import io.circlecoin.internal.di.modules.ActivityModule
-import io.circlecoin.navigation.Navigator
-import javax.inject.Inject
 
 /**
  * Base [Activity] class for every Activity in this application.
  */
 abstract class BaseActivity : Activity() {
-
-  @Inject internal var navigator: Navigator? = null
 
   /**
    * Get the Main Application component for dependency injection.

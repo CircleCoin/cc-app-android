@@ -1,13 +1,6 @@
-buildscript {
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath 'me.tatarka:gradle-retrolambda:3.2.3'
-  }
-}
-
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
   defaultPublishConfig "debug"
@@ -21,11 +14,6 @@ android {
     minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
     targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
     versionCode globalConfiguration.getAt("androidVersionCode")
-  }
-
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
   }
 
   packagingOptions {
@@ -50,6 +38,8 @@ dependencies {
   def testDependencies = rootProject.ext.dataTestDependencies
 
   implementation project(':domain')
+
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
   compileOnly dataDependencies.javaxAnnotation
   implementation dataDependencies.javaxInject
   implementation dataDependencies.okHttp
@@ -58,8 +48,8 @@ dependencies {
   implementation dataDependencies.rxAndroid
   implementation dataDependencies.androidAnnotations
 
-  testCompile testDependencies.junit
-  testCompile testDependencies.assertj
-  testCompile testDependencies.mockito
-  testCompile testDependencies.robolectric
+  testImplementation testDependencies.junit
+  testImplementation testDependencies.assertj
+  testImplementation testDependencies.mockito
+  testImplementation testDependencies.robolectric
 }
