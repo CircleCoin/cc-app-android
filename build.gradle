@@ -1,0 +1,76 @@
+// Manifest version information!
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+def versionCodeApp = versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100
+
+apply from: 'buildsystem/ci.gradle'
+apply from: 'buildsystem/dependencies.gradle'
+
+buildscript {
+    ext.kotlin_version = '1.1.51'
+    repositories {
+        jcenter()
+        mavenCentral()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+def getGitSha() {
+    def p = 'git rev-parse --short HEAD'.execute([], project.rootDir)
+    p.waitFor()
+    if (p.exitValue() != 0) {
+        throw new RuntimeException(p.errorStream.text)
+    }
+
+    return p.text.trim()
+}
+
+def getGitTimestamp() {
+    def p = 'git log -n 1 --format=%at'.execute([], rootDir)
+    p.waitFor()
+    if (p.exitValue() != 0) {
+        throw new RuntimeException(p.errorStream.text)
+    }
+
+    return p.text.trim()
+}
+
+def isCI = 'true'.equals(System.getenv('CI'))
+def preDexEnabled = 'true'.equals(System.getProperty('pre-dex', 'true'))
+
+allprojects {
+    ext {
+        androidApplicationId = 'com.javiertarazaga.instasearch'
+        androidVersionCode = versionCodeApp
+        androidVersionName = "${versionMajor}.${versionMinor}.${versionPatch}"
+        testInstrumentationRunner = 'android.support.test.runner.AndroidJUnitRunner'
+        testApplicationId = 'com.javiertarazaga.instasearch.presentation.test'
+        gitSha = getGitSha()
+        gitTimeStamp = getGitTimestamp()
+        isCiEnvironment = isCI
+        isPreDexEnabled = preDexEnabled
+    }
+}
+
+task runDomainUnitTests(dependsOn: [':domain:test']) {
+    description 'Run unit tests for the domain layer.'
+}
+
+task runDataUnitTests(dependsOn: [':data:cleanTestDebugUnitTest', ':data:testDebugUnitTest']) {
+    description 'Run unit tests for the data layer.'
+}
+
+task runUnitTests(dependsOn: ['runDomainUnitTests', 'runDataUnitTests']) {
+    description 'Run unit tests for both domain and data layers.'
+}
+
+task runAcceptanceTests(dependsOn: [':presentation:connectedAndroidTest']) {
+    description 'Run application acceptance tests.'
+}
+
