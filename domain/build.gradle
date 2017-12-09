@@ -1,9 +1,4 @@
-apply plugin: 'java'
-
-//noinspection GroovyUnusedAssignment
-sourceCompatibility = 1.7
-//noinspection GroovyUnusedAssignment
-targetCompatibility = 1.7
+apply plugin: 'kotlin'
 
 configurations {
   provided
@@ -19,11 +14,12 @@ dependencies {
   def domainDependencies = rootProject.ext.domainDependencies
   def domainTestDependencies = rootProject.ext.domainTestDependencies
 
-  provided domainDependencies.javaxAnnotation
+  implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+  compileOnly domainDependencies.javaxAnnotation
 
-  compile domainDependencies.javaxInject
-  compile domainDependencies.rxJava
-  compile domainDependencies.arrow
+  implementation domainDependencies.javaxInject
+  implementation domainDependencies.rxJava
+  implementation domainDependencies.arrow
 
   testCompile domainTestDependencies.junit
   testCompile domainTestDependencies.mockito

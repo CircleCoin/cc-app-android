@@ -1,12 +1,13 @@
 allprojects {
   repositories {
+    google()
     jcenter()
   }
 }
 
 ext {
   //Android
-  androidBuildToolsVersion = "25.0.2"
+  androidBuildToolsVersion = "26.0.2"
   androidMinSdkVersion = 15
   androidTargetSdkVersion = 26
   androidCompileSdkVersion = 26
@@ -18,7 +19,6 @@ ext {
 
   //Libraries
   daggerVersion = '2.8'
-  butterKnifeVersion = '7.0.1'
   recyclerViewVersion = '21.0.3'
   rxJavaVersion = '2.0.2'
   rxAndroidVersion = '2.0.1'
@@ -49,7 +49,6 @@ ext {
       constraintLayout:   "com.android.support.constraint:constraint-layout:${androidConstraintLayoutVersion}",
       daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
       dagger:             "com.google.dagger:dagger:${daggerVersion}",
-      butterKnife:        "com.jakewharton:butterknife:${butterKnifeVersion}",
       recyclerView:       "com.android.support:recyclerview-v7:${recyclerViewVersion}",
       rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
       rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",

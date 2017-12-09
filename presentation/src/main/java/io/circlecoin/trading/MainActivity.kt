@@ -1,8 +1,9 @@
-package com.example.jtarazaga.gdaxtrading
+package io.circlecoin.trading
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
+import com.example.jtarazaga.gdaxtrading.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
