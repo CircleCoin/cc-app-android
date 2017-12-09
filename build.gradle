@@ -46,7 +46,7 @@ def preDexEnabled = 'true'.equals(System.getProperty('pre-dex', 'true'))
 
 allprojects {
     ext {
-        androidApplicationId = 'com.javiertarazaga.instasearch'
+        androidApplicationId = 'io.circlecoin'
         androidVersionCode = versionCodeApp
         androidVersionName = "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner = 'android.support.test.runner.AndroidJUnitRunner'
